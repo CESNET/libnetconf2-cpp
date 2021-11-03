@@ -1,0 +1,11 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+
+Name: @PROJECT_NAME@
+Version: @LIBNETCONF2_CPP_PKG_VERSION@
+Description: C++ bindings for libnetconf2
+Requires.private: libnetconf2 libyang-cpp
+Libs: -L${libdir} -lnetconf2-cpp
+Libs.private: -lnetconf2 -lyang-cpp
+Cflags: -I${includedir}
