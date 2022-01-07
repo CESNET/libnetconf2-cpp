@@ -33,7 +33,7 @@ set(LIBNETCONF2_CPP_PKG_VERSION "alpha")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_library(netconf2-cpp SHARED
-    src/Context.cpp
+    src/netconf-client.cpp
     )
 
 target_link_libraries(netconf2-cpp PRIVATE PkgConfig::LIBYANG_CPP PkgConfig::LIBNETCONF2)
@@ -57,8 +57,6 @@ if(BUILD_TESTING)
 
         add_test(test_${name} test_${name})
     endfunction()
-
-    libnetconf2_cpp_test(context)
 endif()
 
 if(WITH_DOCS)
