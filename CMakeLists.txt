@@ -39,7 +39,10 @@ add_library(netconf2-cpp SHARED
 target_link_libraries(netconf2-cpp PRIVATE PkgConfig::LIBYANG_CPP PkgConfig::LIBNETCONF2)
 
 if(BUILD_TESTING)
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Threads)
     find_package(doctest 2.4.6 REQUIRED)
+    find_package(Boost REQUIRED)
 
     add_library(DoctestIntegration STATIC
         tests/doctest-integration.cpp
@@ -53,10 +56,12 @@ if(BUILD_TESTING)
         add_executable(test_${name}
             tests/${name}.cpp
             )
-        target_link_libraries(test_${name} DoctestIntegration netconf2-cpp)
+        target_link_libraries(test_${name} DoctestIntegration netconf2-cpp Threads::Threads)
 
         add_test(test_${name} test_${name})
     endfunction()
+
+    libnetconf2_cpp_test(client)
 endif()
 
 if(WITH_DOCS)
