@@ -3,6 +3,7 @@
 #include <functional>
 #include <libnetconf2/log.h>
 #include <libnetconf2/messages_client.h>
+#include <libyang-cpp/DataNode.hpp>
 #include <memory>
 #include <optional>
 #include <string>
