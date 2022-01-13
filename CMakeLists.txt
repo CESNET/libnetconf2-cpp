@@ -36,10 +36,13 @@ add_library(netconf2-cpp SHARED
     src/netconf-client.cpp
     )
 
-target_link_libraries(netconf2-cpp PRIVATE PkgConfig::LIBYANG_CPP PkgConfig::LIBNETCONF2)
+target_link_libraries(netconf2-cpp PUBLIC PkgConfig::LIBYANG_CPP PRIVATE PkgConfig::LIBNETCONF2)
 
 if(BUILD_TESTING)
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Threads)
     find_package(doctest 2.4.6 REQUIRED)
+    find_package(Boost REQUIRED)
 
     add_library(DoctestIntegration STATIC
         tests/doctest-integration.cpp
@@ -49,14 +52,21 @@ if(BUILD_TESTING)
     target_compile_definitions(DoctestIntegration PUBLIC DOCTEST_CONFIG_SUPER_FAST_ASSERTS)
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/tests/test_vars.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/test_vars.hpp" @ONLY)
 
+    add_library(mock_server STATIC
+        tests/mock_server.cpp
+        )
+    target_link_libraries(mock_server DoctestIntegration)
+
     function(libnetconf2_cpp_test name)
         add_executable(test_${name}
             tests/${name}.cpp
             )
-        target_link_libraries(test_${name} DoctestIntegration netconf2-cpp)
+        target_link_libraries(test_${name} DoctestIntegration netconf2-cpp Threads::Threads mock_server)
 
         add_test(test_${name} test_${name})
     endfunction()
+
+    libnetconf2_cpp_test(client)
 endif()
 
 if(WITH_DOCS)
