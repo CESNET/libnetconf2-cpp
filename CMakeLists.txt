@@ -40,6 +40,7 @@ target_link_libraries(netconf2-cpp PRIVATE PkgConfig::LIBYANG_CPP PkgConfig::LIB
 
 if(BUILD_TESTING)
     find_package(doctest 2.4.6 REQUIRED)
+    find_package(Boost REQUIRED)
 
     add_library(DoctestIntegration STATIC
         tests/doctest-integration.cpp
@@ -57,6 +58,8 @@ if(BUILD_TESTING)
 
         add_test(test_${name} test_${name})
     endfunction()
+
+    libnetconf2_cpp_test(client)
 endif()
 
 if(WITH_DOCS)
