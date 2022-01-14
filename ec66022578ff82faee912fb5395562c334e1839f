@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a60b11_3e7cc327",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-14T11:29:45Z",
+      "side": 1,
+      "message": "TSAN complains about the volatile mispattern in libnetconf2:\n \ngithub/CESNET/libnetconf2[devel] $ git grep volatile\nsrc/log.c:volatile uint8_t verbose_level \u003d 0;\nsrc/log_p.h:extern volatile uint8_t verbose_level;",
+      "revId": "ec66022578ff82faee912fb5395562c334e1839f",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bd2e7c6_0240dc0f",
+        "filename": "tests/client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-14T11:29:45Z",
+      "side": 1,
+      "message": "escapeXMLchars() would solve this and also take care of a potential problem with escaping",
+      "range": {
+        "startLine": 53,
+        "startChar": 111,
+        "endLine": 53,
+        "endChar": 132
+      },
+      "revId": "ec66022578ff82faee912fb5395562c334e1839f",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19dd7bd1_72158854",
+        "filename": "tests/client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-14T11:29:45Z",
+      "side": 1,
+      "message": "this is rather vague; please better explain what was changed and why",
+      "range": {
+        "startLine": 59,
+        "startChar": 63,
+        "endLine": 59,
+        "endChar": 93
+      },
+      "revId": "ec66022578ff82faee912fb5395562c334e1839f",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "558a3e1e_58f64b06",
+        "filename": "tests/client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-14T11:29:45Z",
+      "side": 1,
+      "message": "can we use std::jthread already?",
+      "revId": "ec66022578ff82faee912fb5395562c334e1839f",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
