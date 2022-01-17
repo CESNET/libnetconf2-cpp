@@ -18,6 +18,23 @@
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7769b993_b33f723b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000056
+      },
+      "writtenOn": "2022-01-17T18:26:44Z",
+      "side": 1,
+      "message": "The error is now fixed, I\u0027m waiting for the github mirror for the fix.\n\nAbout the test, I was thinking that maybe I shouldn\u0027t do all of this stuff manually and maybe use libyang to export, for example, the message-id or something. I don\u0027t want to use libyang to implement a NETCONF server. Although, i could probably use some libnetconf2 functions? Not sure.",
+      "revId": "ec66022578ff82faee912fb5395562c334e1839f",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bd2e7c6_0240dc0f",
@@ -77,6 +94,24 @@
       "writtenOn": "2022-01-14T11:29:45Z",
       "side": 1,
       "message": "can we use std::jthread already?",
+      "revId": "ec66022578ff82faee912fb5395562c334e1839f",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d531d772_ed376048",
+        "filename": "tests/client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000056
+      },
+      "writtenOn": "2022-01-17T18:26:44Z",
+      "side": 1,
+      "message": "Nope :/ no clang support. And for some reason, they don\u0027t list it on their site https://clang.llvm.org/cxx_status.html#cxx20",
+      "parentUuid": "558a3e1e_58f64b06",
       "revId": "ec66022578ff82faee912fb5395562c334e1839f",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
