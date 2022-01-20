@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95115cc8_df41ba09",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-20T17:11:26Z",
+      "side": 1,
+      "message": "in a perfect world, this should have been a separate commit",
+      "revId": "58231ad6664fa458c90a19f97732cbe1c12bd810",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c46817f6_7393cfe1",
+        "filename": "tests/client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-20T17:11:26Z",
+      "side": 1,
+      "message": "I think that this test will be more readable if these are split out to a separate file.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 1
+      },
+      "revId": "58231ad6664fa458c90a19f97732cbe1c12bd810",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4111ca3b_8b1e990e",
+        "filename": "tests/client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-20T17:11:26Z",
+      "side": 1,
+      "message": "So far, this is for the initial establishing of the session. Can you please add tests for a bunch of edits (done via a libyang tree) and config or data retrieval (including some parsong of data via libyang)? That will also serve as a nice example on how to use this library.",
+      "revId": "58231ad6664fa458c90a19f97732cbe1c12bd810",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e978bc07_1ef1aaf3",
+        "filename": "tests/client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-20T17:11:26Z",
+      "side": 1,
+      "message": "what is this one for?",
+      "range": {
+        "startLine": 183,
+        "startChar": 4,
+        "endLine": 183,
+        "endChar": 51
+      },
+      "revId": "58231ad6664fa458c90a19f97732cbe1c12bd810",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
