@@ -28,7 +28,7 @@ option(WITH_DOCS "Create and install internal documentation (needs Doxygen)" ${D
 find_package(PkgConfig)
 pkg_check_modules(LIBYANG_CPP REQUIRED libyang-cpp>=1.1.0 IMPORTED_TARGET libyang-cpp)
 pkg_check_modules(LIBNETCONF2 REQUIRED libnetconf2>=2.0.23 IMPORTED_TARGET libnetconf2)
-set(LIBNETCONF2_CPP_PKG_VERSION "alpha")
+set(LIBNETCONF2_CPP_PKG_VERSION "1.0.0")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
