@@ -16,6 +16,7 @@ extern "C" {
 }
 #include <sstream>
 #include "UniqueResource.hpp"
+#include "utils.hpp"
 
 namespace libnetconf {
 
@@ -25,7 +26,7 @@ static client::LogCb logCallback;
 
 static void logViaCallback(NC_VERB_LEVEL level, const char* message)
 {
-    logCallback(level, message);
+    logCallback(libnetconf::utils::toLogLevel(level), message);
 }
 
 
@@ -165,9 +166,9 @@ void do_rpc_ok(client::Session* session, managed_rpc&& rpc)
 
 namespace client {
 
-void setLogLevel(NC_VERB_LEVEL level)
+void setLogLevel(LogLevel level)
 {
-    nc_verbosity(level);
+    nc_verbosity(utils::toLogLevel(level));
 }
 
 void setLogCallback(const client::LogCb& callback)
@@ -311,22 +312,29 @@ void Session::editData(const NmdaDatastore datastore, const std::string& data)
     return impl::do_rpc_ok(this, std::move(rpc));
 }
 
-void Session::editConfig(const NC_DATASTORE datastore,
-                         const NC_RPC_EDIT_DFLTOP defaultOperation,
-                         const NC_RPC_EDIT_TESTOPT testOption,
-                         const NC_RPC_EDIT_ERROPT errorOption,
+void Session::editConfig(const Datastore datastore,
+                         const EditDefaultOp defaultOperation,
+                         const EditTestOpt testOption,
+                         const EditErrorOpt errorOption,
                          const std::string& data)
 {
-    auto rpc = impl::guarded(nc_rpc_edit(datastore, defaultOperation, testOption, errorOption, data.c_str(), NC_PARAMTYPE_CONST));
+    auto rpc = impl::guarded(
+            nc_rpc_edit(
+                utils::toDatastore(datastore),
+                utils::toDefaultOp(defaultOperation),
+                utils::toTestOpt(testOption),
+                utils::toErrorOpt(errorOption),
+                data.c_str(),
+                NC_PARAMTYPE_CONST));
     if (!rpc) {
         throw std::runtime_error("Cannot create edit-config RPC");
     }
     impl::do_rpc_ok(this, std::move(rpc));
 }
 
-void Session::copyConfigFromString(const NC_DATASTORE target, const std::string& data)
+void Session::copyConfigFromString(const Datastore target, const std::string& data)
 {
-    auto rpc = impl::guarded(nc_rpc_copy(target, nullptr, target /* yeah, cannot be 0... */, data.c_str(), NC_WD_UNKNOWN, NC_PARAMTYPE_CONST));
+    auto rpc = impl::guarded(nc_rpc_copy(utils::toDatastore(target), nullptr, utils::toDatastore(target) /* yeah, cannot be 0... */, data.c_str(), NC_WD_UNKNOWN, NC_PARAMTYPE_CONST));
     if (!rpc) {
         throw std::runtime_error("Cannot create copy-config RPC");
     }
@@ -361,9 +369,9 @@ std::optional<libyang::DataNode> Session::rpc_or_action(const std::string& xmlDa
     return impl::do_rpc(this, std::move(rpc), nullptr);
 }
 
-void Session::copyConfig(const NC_DATASTORE source, const NC_DATASTORE destination)
+void Session::copyConfig(const Datastore source, const Datastore destination)
 {
-    auto rpc = impl::guarded(nc_rpc_copy(destination, nullptr, source, nullptr, NC_WD_UNKNOWN, NC_PARAMTYPE_CONST));
+    auto rpc = impl::guarded(nc_rpc_copy(utils::toDatastore(destination), nullptr, utils::toDatastore(source), nullptr, NC_WD_UNKNOWN, NC_PARAMTYPE_CONST));
     if (!rpc) {
         throw std::runtime_error("Cannot create copy-config RPC");
     }

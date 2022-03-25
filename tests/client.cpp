@@ -114,7 +114,7 @@ TEST_CASE("client")
     DOCTEST_SUBCASE("copyConfig")
     {
         testedFunctionality = [] (std::unique_ptr<libnetconf::client::Session>& session) {
-            session->copyConfig(NC_DATASTORE_RUNNING, NC_DATASTORE_STARTUP);
+            session->copyConfig(libnetconf::Datastore::Running, libnetconf::Datastore::Startup);
             return std::nullopt;
         };
 
@@ -124,7 +124,7 @@ TEST_CASE("client")
     DOCTEST_SUBCASE("copyConfigFromString")
     {
         testedFunctionality = [] (std::unique_ptr<libnetconf::client::Session>& session) {
-            session->copyConfigFromString(NC_DATASTORE_RUNNING, R"(<myLeaf xmlns="http://example.com">AHOJ</myLeaf>)");
+            session->copyConfigFromString(libnetconf::Datastore::Running, R"(<myLeaf xmlns="http://example.com">AHOJ</myLeaf>)");
             return std::nullopt;
         };
 
@@ -145,10 +145,10 @@ TEST_CASE("client")
     {
         testedFunctionality = [] (std::unique_ptr<libnetconf::client::Session>& session) {
             session->editConfig(
-                NC_DATASTORE_RUNNING,
-                NC_RPC_EDIT_DFLTOP_MERGE,
-                NC_RPC_EDIT_TESTOPT_TESTSET,
-                NC_RPC_EDIT_ERROPT_ROLLBACK,
+                libnetconf::Datastore::Running,
+                libnetconf::EditDefaultOp::Merge,
+                libnetconf::EditTestOpt::TestSet,
+                libnetconf::EditErrorOpt::Rollback,
                 R"(<myLeaf xmlns="http://example.com">AHOJ</myLeaf>)");
             return std::nullopt;
         };
@@ -156,7 +156,7 @@ TEST_CASE("client")
         replyData = mock_server::OK_REPLY;
     }
 
-    libnetconf::client::setLogLevel(NC_VERB_DEBUG);
+    libnetconf::client::setLogLevel(libnetconf::LogLevel::Debug);
     auto x = std::jthread{[&testedFunctionality, &expectedJSON, &processInput, &processOutput] {
         auto session = libnetconf::client::Session::connectFd(processInput.pipe().native_source(), processOutput.pipe().native_sink());
         auto dataNode = testedFunctionality(session);
