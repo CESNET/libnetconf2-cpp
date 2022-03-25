@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05188b5f_481d8980",
+        "filename": "tests/client.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-03-25T11:29:18Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure about the name. The current one implies that it\u0027s might be an implementation detail of the test. Perhaps something like \"testedFunctionality\" or `functionUnderTest`?",
+      "range": {
+        "startLine": 42,
+        "startChar": 107,
+        "endLine": 42,
+        "endChar": 115
+      },
+      "revId": "7a5fa3de93c5c111a8b5e9a06f4c466ac5cabd80",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f331eba1_c6ad1625",
+        "filename": "tests/client.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-03-25T11:29:18Z",
+      "side": 1,
+      "message": "I asked on a chat whether this can be `auto`, but Vasek pointed out that a full type means that there\u0027s usable completion in the text editor here, which makes sense to me",
+      "range": {
+        "startLine": 48,
+        "startChar": 23,
+        "endLine": 48,
+        "endChar": 68
+      },
+      "revId": "7a5fa3de93c5c111a8b5e9a06f4c466ac5cabd80",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4b68c4_cb15615f",
+        "filename": "tests/client.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-03-25T11:29:18Z",
+      "side": 1,
+      "message": "nit: actualJSON",
+      "range": {
+        "startLine": 163,
+        "startChar": 20,
+        "endLine": 163,
+        "endChar": 26
+      },
+      "revId": "7a5fa3de93c5c111a8b5e9a06f4c466ac5cabd80",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
