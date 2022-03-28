@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f72fada9_5c321370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-03-28T09:06:39Z",
+      "side": 1,
+      "message": "The coverage report indicates that these can be added as well:\n\n- commit\n- error handling when libnetconf2 says boo boo,\n- \u003crpc-error\u003e\n\nBut let\u0027s merge what has been done already, it\u0027s a big improvement.",
+      "revId": "a4255b6426f5a5d1c38e67f787198b7feab8677c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
