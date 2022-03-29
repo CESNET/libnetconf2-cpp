@@ -158,7 +158,9 @@ TEST_CASE("client")
 
     libnetconf::client::setLogLevel(libnetconf::LogLevel::Debug);
     auto x = std::jthread{[&testedFunctionality, &expectedJSON, &processInput, &processOutput] {
-        auto session = libnetconf::client::Session::connectFd(processInput.pipe().native_source(), processOutput.pipe().native_sink());
+        auto ctx = libyang::Context(std::nullopt,
+                libyang::ContextOptions::DisableSearchCwd | libyang::ContextOptions::DisableSearchDirs | libyang::ContextOptions::NoYangLibrary);
+        auto session = libnetconf::client::Session::connectFd(processInput.pipe().native_source(), processOutput.pipe().native_sink(), ctx);
         auto dataNode = testedFunctionality(session);
         std::string actualJSON;
         if (dataNode) {
