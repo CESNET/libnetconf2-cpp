@@ -7,12 +7,14 @@
 */
 
 #include <boost/process.hpp>
+#include <iostream>
 #include <doctest/doctest.h>
 #include <filesystem>
 #include <functional>
 #include <libnetconf2-cpp/netconf-client.hpp>
 #include <optional>
 #include <thread>
+#include "UniqueResource.hpp"
 #include "mock_server.hpp"
 #include "test_vars.hpp"
 
@@ -168,12 +170,23 @@ TEST_CASE("client")
 
     }};
 
+    auto testFailureHandler = make_unique_resource([] {}, [&] {
+        // Check whether we're calling this while throwing: this indicates that there has been some expectation failure
+        // from doctest. Such expectation failure may cause the client thread to block, because we didn't give it a
+        // reply. In this case we will close the pipes. This does make the client thread throw an unhandled exception,
+        // but that's fine, because the test failed anyway.
+        if (std::uncaught_exceptions()) {
+            processInput.pipe().close();
+            processOutput.pipe().close();
+        }
+    });
+
     mock_server::handleSessionStart(curMsgId, processInput, processOutput);
 
     mock_server::skipNetconfChunk(processOutput);
     mock_server::sendRpcReply(curMsgId, processInput, replyData);
 
     // For <close-session>
-    mock_server::skipNetconfChunk(processOutput);
+    mock_server::skipNetconfChunk(processOutput, {"<close-session"});
     mock_server::sendRpcReply(curMsgId, processInput, mock_server::OK_REPLY);
 }
