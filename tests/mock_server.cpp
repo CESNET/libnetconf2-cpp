@@ -695,6 +695,7 @@ std::string readFileToString(const std::filesystem::path& path)
 void sendHello(boost::process::opstream& processInput)
 {
     processInput << serverHello;
+    processInput.flush();
 }
 
 auto loadModuleStr(const std::string& module_and_revision)
@@ -726,88 +727,72 @@ void sendRpcReply(int msgId, boost::process::opstream& processInput, std::string
     sendMsgWithSize(processInput, (rpcReplyStartTag + data + rpcReplyEndTag));
 }
 
-void skipNetconfChunk(boost::process::ipstream& processOutput)
+void skipNetconfChunk(boost::process::ipstream& processOutput, const std::vector<std::string>& mustContain)
 {
     REQUIRE(processOutput.get() == '\n');
     REQUIRE(processOutput.get() == '#');
     int size;
     processOutput >> size;
-    processOutput.ignore(size + 1);
+    auto buf = std::make_unique<char[]>(size + 1);
+    processOutput.read(buf.get(), size + 1);
     REQUIRE(processOutput.get() == '\n');
     REQUIRE(processOutput.get() == '#');
     REQUIRE(processOutput.get() == '#');
     REQUIRE(processOutput.get() == '\n');
+    auto view = std::string_view(buf.get(), size + 1);
+    for (const auto& str : mustContain) {
+        CAPTURE(str);
+        CAPTURE(view);
+        REQUIRE(view.find(str) != std::string_view::npos);
+    }
 }
+
+enum class Latest {
+    Yes,
+    No
+};
 
 void handleSessionStart(int& curMsgId, boost::process::opstream& processInput, boost::process::ipstream& processOutput)
 {
-    sendHello(processInput);
+    auto resolveGetSchema = [&] (const auto modName, const char* revision, const auto latest) {
+        skipNetconfChunk(processOutput, {"get-schema", modName, latest == Latest::Yes ? "" : revision});
+        sendModule(curMsgId++, processInput, modName + (revision ? ("@"s + revision) : ""));
+    };
     skipClientHello(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-netconf@2013-09-29");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-netconf-acm@2018-02-14");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-yang-metadata@2016-08-05");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-yang-library@2019-01-04");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-datastores@2018-02-14");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-netconf-nmda@2019-01-07");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-origin@2018-02-14");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-netconf-with-defaults@2011-06-01");
-    skipNetconfChunk(processOutput);
+    sendHello(processInput);
+    resolveGetSchema("ietf-netconf", "2013-09-29", Latest::Yes);
+    resolveGetSchema("ietf-netconf-acm", "2018-02-14", Latest::No);
+    resolveGetSchema("ietf-yang-metadata", "2016-08-05", Latest::No);
+    resolveGetSchema("ietf-yang-library", "2019-01-04", Latest::No);
+    resolveGetSchema("ietf-datastores", "2018-02-14", Latest::Yes);
+    resolveGetSchema("ietf-netconf-nmda", "2019-01-07", Latest::Yes);
+    resolveGetSchema("ietf-origin", "2018-02-14", Latest::Yes);
+    resolveGetSchema("ietf-netconf-with-defaults", "2011-06-01", Latest::No);
+    skipNetconfChunk(processOutput, {});
     sendRpcReply(curMsgId++, processInput, yangLib);
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-netconf-notifications@2012-02-06");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "nc-notifications@2008-07-14");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "notifications@2008-07-14");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-x509-cert-to-name@2014-12-10");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-crypto-types@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-keystore@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-truststore@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-tcp-common@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-ssh-server@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-ssh-common@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "iana-crypt-hash@2014-08-06");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-tls-server@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-tls-common@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-netconf-server@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-tcp-client@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-tcp-server@2019-07-02");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-interfaces@2018-02-20");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-ip@2018-02-22");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-network-instance@2019-01-21");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-subscribed-notifications@2019-09-09");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-restconf@2017-01-26");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-yang-push@2019-09-09");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "ietf-yang-patch@2017-02-22");
-    skipNetconfChunk(processOutput);
-    sendModule(curMsgId++, processInput, "example-schema");
-    skipNetconfChunk(processOutput);
+    resolveGetSchema("ietf-netconf-notifications", "2012-02-06", Latest::No);
+    resolveGetSchema("nc-notifications", "2008-07-14", Latest::No);
+    resolveGetSchema("notifications", "2008-07-14", Latest::No);
+    resolveGetSchema("ietf-x509-cert-to-name", "2014-12-10", Latest::No);
+    resolveGetSchema("ietf-crypto-types", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-keystore", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-truststore", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-tcp-common", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-ssh-server", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-ssh-common", "2019-07-02", Latest::No);
+    resolveGetSchema("iana-crypt-hash", "2014-08-06", Latest::No);
+    resolveGetSchema("ietf-tls-server", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-tls-common", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-netconf-server", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-tcp-client", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-tcp-server", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-interfaces", "2018-02-20", Latest::No);
+    resolveGetSchema("ietf-ip", "2018-02-22", Latest::No);
+    resolveGetSchema("ietf-network-instance", "2019-01-21", Latest::No);
+    resolveGetSchema("ietf-subscribed-notifications", "2019-09-09", Latest::No);
+    resolveGetSchema("ietf-restconf", "2017-01-26", Latest::No);
+    resolveGetSchema("ietf-yang-push", "2019-09-09", Latest::No);
+    resolveGetSchema("ietf-yang-patch", "2017-02-22", Latest::No);
+    resolveGetSchema("example-schema", nullptr, Latest::Yes);
 }
 }

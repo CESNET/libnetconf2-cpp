@@ -174,6 +174,6 @@ TEST_CASE("client")
     mock_server::sendRpcReply(curMsgId, processInput, replyData);
 
     // For <close-session>
-    mock_server::skipNetconfChunk(processOutput);
+    mock_server::skipNetconfChunk(processOutput, {"<close-session"});
     mock_server::sendRpcReply(curMsgId, processInput, mock_server::OK_REPLY);
 }
