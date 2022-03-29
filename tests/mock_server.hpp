@@ -10,7 +10,7 @@
 #include <string>
 
 namespace mock_server {
-void skipNetconfChunk(boost::process::ipstream& processOutput);
+void skipNetconfChunk(boost::process::ipstream& processOutput, const std::vector<std::string>& mustContain = {});
 void sendRpcReply(int msgId, boost::process::opstream& processInput, std::string data);
 void sendOkReply(int msgId, boost::process::opstream& processInput);
 void handleSessionStart(int& curMsgId, boost::process::opstream& processInput, boost::process::ipstream& processOutput);
