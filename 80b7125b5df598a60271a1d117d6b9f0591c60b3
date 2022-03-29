@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb1a7bc_577fc122",
+        "filename": "tests/mock_server.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-03-29T10:49:13Z",
+      "side": 1,
+      "message": "this feels rather crude; any reason for not simply inserting a full text of the expected NETCONF command here?",
+      "revId": "80b7125b5df598a60271a1d117d6b9f0591c60b3",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
