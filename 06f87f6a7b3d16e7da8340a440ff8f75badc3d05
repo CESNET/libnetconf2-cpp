@@ -34,6 +34,24 @@
       "parentUuid": "e4a084ed_1c14eb0e",
       "revId": "06f87f6a7b3d16e7da8340a440ff8f75badc3d05",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f20984_02cf78a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-03-31T14:30:22Z",
+      "side": 1,
+      "message": "This means that either the exceptions from C++ code are not translated into proper C error codes, or that there\u0027s a bug in libnetconf2 or libyang that it keeps going forward even in face of invalid data. Either are wrong. Can you please debug this, fix the C++ side, and if it\u0027s broken in the C code, work with upstream to get it fixed?",
+      "parentUuid": "33ea5f4b_a47f3629",
+      "revId": "06f87f6a7b3d16e7da8340a440ff8f75badc3d05",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
   ]
 }
