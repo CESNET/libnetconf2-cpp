@@ -7,6 +7,7 @@
 */
 #include <boost/process.hpp>
 #include <doctest/doctest.h>
+#include <fstream>
 #include <filesystem>
 #include "mock_server.hpp"
 #include "test_vars.hpp"
