@@ -23,7 +23,7 @@ const auto yangLib = R"(
             <name>complete</name>
             <module>
                 <name>yang</name>
-                <revision>2021-04-07</revision>
+                <revision>2022-06-16</revision>
                 <namespace>urn:ietf:params:xml:ns:yang:1</namespace>
             </module>
             <module>
@@ -317,7 +317,7 @@ const auto yangLib = R"(
         </module>
         <module>
             <name>yang</name>
-            <revision>2021-04-07</revision>
+            <revision>2022-06-16</revision>
             <namespace>urn:ietf:params:xml:ns:yang:1</namespace>
             <conformance-type>implement</conformance-type>
         </module>
