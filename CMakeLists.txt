@@ -84,7 +84,6 @@ endif()
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/libnetconf2-cpp.pc.in" "${CMAKE_CURRENT_BINARY_DIR}/libnetconf2-cpp.pc" @ONLY)
 
-# this is not enough, but at least it will generate the `install` target so that the CI setup is less magic
-install(TARGETS netconf2-cpp DESTINATION lib)
+install(TARGETS netconf2-cpp)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/libnetconf2-cpp" TYPE INCLUDE)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libnetconf2-cpp.pc" DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
