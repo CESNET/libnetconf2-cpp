@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "565b5578_3b9fe90f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-10-24T08:51:58Z",
+      "side": 1,
+      "message": "Nice did not know that it is possible to omit DESTINATION but it is indeed in the docs.",
+      "revId": "017b8b4af0b29f054c2eb1a015ab13ad453febe8",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
