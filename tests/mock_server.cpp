@@ -17,7 +17,7 @@ using namespace std::string_literals;
 namespace mock_server  {
 namespace {
 const auto yangLib = R"(
-<data xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-nmda">
+<data>
     <yang-library xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-library">
         <module-set>
             <name>complete</name>
@@ -117,15 +117,7 @@ const auto yangLib = R"(
                 <name>ietf-x509-cert-to-name</name>
                 <revision>2014-12-10</revision>
                 <namespace>urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name</namespace>
-                <location>
-                    file:///opt/cesnet-au/sysrepo/repository/yang/ietf-x509-cert-to-name@2014-12-10.yang
-                </location>
-            </module>
-            <module>
-                <name>ietf-crypto-types</name>
-                <revision>2019-07-02</revision>
-                <namespace>urn:ietf:params:xml:ns:yang:ietf-crypto-types</namespace>
-                <location>file:///opt/cesnet-au/sysrepo/repository/yang/ietf-crypto-types@2019-07-02.yang</location>
+                <location>file:///opt/cesnet-au/sysrepo/repository/yang/ietf-x509-cert-to-name@2014-12-10.yang</location>
             </module>
             <module>
                 <name>ietf-keystore</name>
@@ -235,6 +227,17 @@ const auto yangLib = R"(
                 <namespace>urn:ietf:params:xml:ns:yang:ietf-yang-types</namespace>
             </import-only-module>
             <import-only-module>
+                <name>ietf-yang-structure-ext</name>
+                <revision>2020-06-17</revision>
+                <namespace>urn:ietf:params:xml:ns:yang:ietf-yang-structure-ext</namespace>
+            </import-only-module>
+            <import-only-module>
+                <name>ietf-crypto-types</name>
+                <revision>2019-07-02</revision>
+                <namespace>urn:ietf:params:xml:ns:yang:ietf-crypto-types</namespace>
+                <location>file:///home/jkt/work/prog/_build/czechlight-clang14-asan-ubsan-ly2/target/etc-sysrepo/yang/ietf-crypto-types@2019-07-02.yang</location>
+            </import-only-module>
+            <import-only-module>
                 <name>ietf-ssh-common</name>
                 <revision>2019-07-02</revision>
                 <namespace>urn:ietf:params:xml:ns:yang:ietf-ssh-common</namespace>
@@ -340,6 +343,12 @@ const auto yangLib = R"(
             <conformance-type>implement</conformance-type>
         </module>
         <module>
+            <name>ietf-yang-structure-ext</name>
+            <revision>2020-06-17</revision>
+            <namespace>urn:ietf:params:xml:ns:yang:ietf-yang-structure-ext</namespace>
+            <conformance-type>import</conformance-type>
+        </module>
+        <module>
             <name>ietf-datastores</name>
             <revision>2018-02-14</revision>
             <schema>file:///opt/cesnet-au/sysrepo/repository/yang/ietf-datastores@2018-02-14.yang</schema>
@@ -438,19 +447,19 @@ const auto yangLib = R"(
             <conformance-type>implement</conformance-type>
         </module>
         <module>
-            <name>ietf-crypto-types</name>
-            <revision>2019-07-02</revision>
-            <schema>file:///opt/cesnet-au/sysrepo/repository/yang/ietf-crypto-types@2019-07-02.yang</schema>
-            <namespace>urn:ietf:params:xml:ns:yang:ietf-crypto-types</namespace>
-            <conformance-type>implement</conformance-type>
-        </module>
-        <module>
             <name>ietf-keystore</name>
             <revision>2019-07-02</revision>
             <schema>file:///opt/cesnet-au/sysrepo/repository/yang/ietf-keystore@2019-07-02.yang</schema>
             <namespace>urn:ietf:params:xml:ns:yang:ietf-keystore</namespace>
             <feature>keystore-supported</feature>
             <conformance-type>implement</conformance-type>
+        </module>
+        <module>
+            <name>ietf-crypto-types</name>
+            <revision>2019-07-02</revision>
+            <schema>file:///home/jkt/work/prog/_build/czechlight-clang14-asan-ubsan-ly2/target/etc-sysrepo/yang/ietf-crypto-types@2019-07-02.yang</schema>
+            <namespace>urn:ietf:params:xml:ns:yang:ietf-crypto-types</namespace>
+            <conformance-type>import</conformance-type>
         </module>
         <module>
             <name>ietf-truststore</name>
@@ -615,12 +624,13 @@ const auto serverHello = R"(
         <capability>
             urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&amp;also-supported=report-all,report-all-tagged,trim,explicit
         </capability>
+        <capability>urn:ietf:params:netconf:capability:notification:1.0</capability>
         <capability>urn:ietf:params:netconf:capability:interleave:1.0</capability>
         <capability>urn:ietf:params:netconf:capability:url:1.0?scheme=scp,http,https,ftp,sftp,ftps,file</capability>
         <capability>
             urn:ietf:params:xml:ns:yang:ietf-yang-metadata?module=ietf-yang-metadata&amp;revision=2016-08-05
         </capability>
-        <capability>urn:ietf:params:xml:ns:yang:1?module=yang&amp;revision=2021-04-07</capability>
+        <capability>urn:ietf:params:xml:ns:yang:1?module=yang&amp;revision=2022-06-16</capability>
         <capability>
             urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;revision=2013-07-15
         </capability>
@@ -630,6 +640,7 @@ const auto serverHello = R"(
         <capability>
             urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&amp;content-id=27
         </capability>
+        <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-acm?module=ietf-netconf-acm&amp;revision=2018-02-14</capability>
         <capability>
             urn:ietf:params:xml:ns:netconf:base:1.0?module=ietf-netconf&amp;revision=2013-09-29&amp;features=writable-running,candidate,confirmed-commit,rollback-on-error,validate,startup,url,xpath
         </capability>
@@ -640,8 +651,15 @@ const auto serverHello = R"(
             urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?module=ietf-netconf-with-defaults&amp;revision=2011-06-01
         </capability>
         <capability>
+            urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?module=ietf-netconf-notifications&amp;revision=2012-02-06
+        </capability>
+        <capability>
             urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?module=ietf-netconf-monitoring&amp;revision=2010-10-04
         </capability>
+        <capability>urn:ietf:params:xml:ns:netmod:notification?module=nc-notifications&amp;revision=2008-07-14</capability>
+        <capability>urn:ietf:params:xml:ns:netconf:notification:1.0?module=notifications&amp;revision=2008-07-14</capability>
+        <capability>urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?module=ietf-x509-cert-to-name&amp;revision=2014-12-10</capability>
+        <capability>urn:ietf:params:xml:ns:yang:iana-crypt-hash?module=iana-crypt-hash&amp;revision=2014-08-06</capability>
     </capabilities>
     <session-id>1</session-id>
 </hello>
@@ -771,19 +789,17 @@ void handleSessionStart(int& curMsgId, boost::process::opstream& processInput, b
     resolveGetSchema("ietf-netconf", "2013-09-29", Latest::Yes);
     resolveGetSchema("ietf-netconf-acm", "2018-02-14", Latest::No);
     resolveGetSchema("ietf-yang-metadata", "2016-08-05", Latest::No);
-    resolveGetSchema("ietf-yang-library", "2019-01-04", Latest::No);
-    resolveGetSchema("ietf-datastores", "2018-02-14", Latest::Yes);
-    resolveGetSchema("ietf-netconf-nmda", "2019-01-07", Latest::Yes);
-    resolveGetSchema("ietf-origin", "2018-02-14", Latest::Yes);
-    resolveGetSchema("ietf-netconf-with-defaults", "2011-06-01", Latest::No);
     skipNetconfChunk(processOutput, {});
     sendRpcReply(curMsgId++, processInput, yangLib);
+    resolveGetSchema("ietf-netconf-with-defaults", "2011-06-01", Latest::No);
     resolveGetSchema("ietf-netconf-notifications", "2012-02-06", Latest::No);
+    resolveGetSchema("ietf-origin", "2018-02-14", Latest::No);
+    resolveGetSchema("ietf-netconf-nmda", "2019-01-07", Latest::No);
     resolveGetSchema("nc-notifications", "2008-07-14", Latest::No);
     resolveGetSchema("notifications", "2008-07-14", Latest::No);
     resolveGetSchema("ietf-x509-cert-to-name", "2014-12-10", Latest::No);
-    resolveGetSchema("ietf-crypto-types", "2019-07-02", Latest::No);
     resolveGetSchema("ietf-keystore", "2019-07-02", Latest::No);
+    resolveGetSchema("ietf-crypto-types", "2019-07-02", Latest::No);
     resolveGetSchema("ietf-truststore", "2019-07-02", Latest::No);
     resolveGetSchema("ietf-tcp-common", "2019-07-02", Latest::No);
     resolveGetSchema("ietf-ssh-server", "2019-07-02", Latest::No);
