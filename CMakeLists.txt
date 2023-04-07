@@ -4,8 +4,8 @@
 # Written by Václav Kubernát <kubernat@cesnet.cz>
 #
 
-project(libnetconf2-cpp LANGUAGES CXX)
 cmake_minimum_required(VERSION 3.19)
+project(libnetconf2-cpp LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(CTest)
