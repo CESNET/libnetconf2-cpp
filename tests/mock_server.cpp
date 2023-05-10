@@ -11,6 +11,7 @@
 #include <filesystem>
 #include "mock_server.hpp"
 #include "test_vars.hpp"
+#include <iostream>
 
 using namespace std::string_literals;
 
@@ -708,7 +709,15 @@ std::string readFileToString(const std::filesystem::path& path)
         throw std::invalid_argument("File '" + std::string(path) + "' does not exist.");
 
     std::istreambuf_iterator<char> begin(ifs), end;
-    return {begin, end};
+
+    std::cerr << "mock_server.cpp readFileToString(" << path << "): is_open: " << ifs.is_open() << ", good: " << ifs.good() << std::endl;
+    std::string res;
+    int i;
+    for (i = 0; begin != end; ++begin, ++i) {
+        res += *begin;
+    }
+    std::cerr << "mock_server.cpp: after reading " << i << " characters; is_open: " << ifs.is_open() << ", good: " << ifs.good() << std::endl;
+    return res;
 }
 
 void sendHello(boost::process::opstream& processInput)
