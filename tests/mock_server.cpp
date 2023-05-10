@@ -11,6 +11,7 @@
 #include <filesystem>
 #include "mock_server.hpp"
 #include "test_vars.hpp"
+#include <iostream>
 
 using namespace std::string_literals;
 
@@ -703,6 +704,16 @@ void sendMsgWithSize(boost::process::opstream& processInput, const std::string& 
 
 std::string readFileToString(const std::filesystem::path& path)
 {
+    {
+        std::ifstream ifs(path);
+        if (!ifs.is_open())
+            throw std::invalid_argument("File '" + std::string(path) + "' does not exist.");
+
+        std::istreambuf_iterator<char> begin(ifs), end;
+
+        std::cerr << "mock_server.cpp readFileToString(" << path << "): is_open: " << ifs.is_open() << ", good: "
+            << ifs.good() << ", begin == end" << (begin == end) << ", distance: " << std::distance(begin, end) << std::endl;
+    }
     std::ifstream ifs(path);
     if (!ifs.is_open())
         throw std::invalid_argument("File '" + std::string(path) + "' does not exist.");
