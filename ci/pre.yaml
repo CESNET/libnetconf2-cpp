@@ -1,13 +1,5 @@
 - hosts: all
   tasks:
-    - name: install pcre2
-      package:
-        name: pcre2-devel
-        state: present
-      become: true
-
-    - name: disable SSSD
-      package:
-        name: sssd-client
-        state: absent
+    - name: install libssh-debuginfo
+      command: 'dnf debuginfo-install -y libssh'
       become: true
