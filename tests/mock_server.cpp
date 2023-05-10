@@ -9,6 +9,7 @@
 #include <doctest/doctest.h>
 #include <fstream>
 #include <filesystem>
+#include <sstream>
 #include "mock_server.hpp"
 #include "test_vars.hpp"
 
@@ -707,8 +708,9 @@ std::string readFileToString(const std::filesystem::path& path)
     if (!ifs.is_open())
         throw std::invalid_argument("File '" + std::string(path) + "' does not exist.");
 
-    std::istreambuf_iterator<char> begin(ifs), end;
-    return {begin, end};
+    std::ostringstream ss;
+    ss << ifs.rdbuf();
+    return ss.str();
 }
 
 void sendHello(boost::process::opstream& processInput)
