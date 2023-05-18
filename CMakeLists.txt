@@ -41,7 +41,7 @@ target_link_libraries(netconf2-cpp PUBLIC PkgConfig::LIBYANG_CPP PRIVATE PkgConf
 if(BUILD_TESTING)
     set(THREADS_PREFER_PTHREAD_FLAG ON)
     find_package(Threads)
-    find_package(doctest 2.4.6 REQUIRED)
+    find_package(doctest 2.4.11 REQUIRED)
     find_package(Boost REQUIRED)
 
     add_library(DoctestIntegration STATIC
