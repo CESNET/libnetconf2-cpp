@@ -782,7 +782,7 @@ void handleSessionStart(int& curMsgId, boost::process::opstream& processInput, b
             modName +
             R"(</identifier>)" +
             (latest == Latest::Yes ? "" : R"(<version>)"s + revision + R"(</version>)") +
-            R"(<format xmlns:ncm="urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring">ncm:yang</format></get-schema></rpc>)";
+            R"(<format>yang</format></get-schema></rpc>)";
         skipNetconfChunk(processOutput, {expectedRpc});
         sendModule(curMsgId++, processInput, modName + (revision ? ("@"s + revision) : ""));
     };
