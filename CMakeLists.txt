@@ -28,9 +28,12 @@ option(WITH_DOCS "Create and install internal documentation (needs Doxygen)" ${D
 find_package(PkgConfig)
 pkg_check_modules(LIBYANG_CPP REQUIRED libyang-cpp>=1.1.0 IMPORTED_TARGET)
 pkg_check_modules(LIBNETCONF2 REQUIRED libnetconf2>=2.1.28 IMPORTED_TARGET)
+include(CheckSymbolExists)
+check_symbol_exists("NC_ENABLED_SSH" "nc_client.h" LIBNETCONF2_CPP_ENABLED_SSH)
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/config.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/include/libnetconf2-cpp/config.hpp" @ONLY)
 set(LIBNETCONF2_CPP_PKG_VERSION "1.0.0")
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
 add_library(netconf2-cpp SHARED
     src/netconf-client.cpp
@@ -86,4 +89,5 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/libnetconf2-cpp.pc.in" "${CMAKE_CURR
 
 install(TARGETS netconf2-cpp)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/libnetconf2-cpp" TYPE INCLUDE)
+install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include/libnetconf2-cpp" TYPE INCLUDE)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libnetconf2-cpp.pc" DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
