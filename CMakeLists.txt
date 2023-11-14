@@ -24,6 +24,7 @@ prepare_git_version(LIBYANG_CPP_VERSION "0.0")
 
 find_package(Doxygen)
 option(WITH_DOCS "Create and install internal documentation (needs Doxygen)" ${DOXYGEN_FOUND})
+option(BUILD_SHARED_LIBS "By default, shared libs are enabled. Turn off for a static build." ON)
 
 find_package(PkgConfig)
 pkg_check_modules(LIBYANG_CPP REQUIRED libyang-cpp>=1.1.0 IMPORTED_TARGET)
@@ -36,7 +37,7 @@ set(LIBNETCONF2_CPP_PKG_VERSION "1.0.0")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
-add_library(netconf2-cpp SHARED
+add_library(netconf2-cpp
     src/netconf-client.cpp
     )
 
