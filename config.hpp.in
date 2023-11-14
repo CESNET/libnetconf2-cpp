@@ -1,0 +1,3 @@
+#pragma once
+
+#cmakedefine LIBNETCONF2_CPP_ENABLED_SSH

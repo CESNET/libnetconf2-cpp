@@ -58,6 +58,7 @@ public:
     ClientInit& operator=(ClientInit&&) = delete;
 };
 
+#ifdef LIBNETCONF2_CPP_ENABLED_SSH
 static std::mutex clientOptions;
 
 char* ssh_auth_interactive_cb(const char* auth_name, const char* instruction, const char* prompt, int echo, void* priv)
@@ -66,6 +67,7 @@ char* ssh_auth_interactive_cb(const char* auth_name, const char* instruction, co
     auto res = (*cb)(auth_name, instruction, prompt, echo);
     return ::strdup(res.c_str());
 }
+#endif
 
 auto guarded(nc_rpc* ptr)
 {
@@ -198,6 +200,7 @@ Session::~Session()
     ::nc_session_free(m_session, nullptr);
 }
 
+#ifdef LIBNETCONF2_CPP_ENABLED_SSH
 std::unique_ptr<Session> Session::connectPubkey(const std::string& host, const uint16_t port, const std::string& user, const std::string& pubPath, const std::string& privPath, std::optional<libyang::Context> ctx)
 {
     impl::ClientInit::instance();
@@ -236,6 +239,7 @@ std::unique_ptr<Session> Session::connectKbdInteractive(const std::string& host,
     }
     return session;
 }
+#endif
 
 std::unique_ptr<Session> Session::connectFd(const int source, const int sink, std::optional<libyang::Context> ctx)
 {

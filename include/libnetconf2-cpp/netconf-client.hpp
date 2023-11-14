@@ -3,6 +3,7 @@
 #include <functional>
 #include <libyang-cpp/Context.hpp>
 #include <libnetconf2-cpp/Enum.hpp>
+#include <libnetconf2-cpp/config.hpp>
 #include <memory>
 #include <optional>
 #include <string>
@@ -35,8 +36,10 @@ class Session {
 public:
     Session(struct nc_session* session);
     ~Session();
+#ifdef LIBNETCONF2_CPP_ENABLED_SSH
     static std::unique_ptr<Session> connectPubkey(const std::string& host, const uint16_t port, const std::string& user, const std::string& pubPath, const std::string& privPath, std::optional<libyang::Context> ctx = std::nullopt);
     static std::unique_ptr<Session> connectKbdInteractive(const std::string& host, const uint16_t port, const std::string& user, const KbdInteractiveCb& callback, std::optional<libyang::Context> ctx = std::nullopt);
+#endif
     static std::unique_ptr<Session> connectSocket(const std::string& path, std::optional<libyang::Context> ctx = std::nullopt);
     static std::unique_ptr<Session> connectFd(const int source, const int sink, std::optional<libyang::Context> ctx = std::nullopt);
     [[nodiscard]] std::vector<std::string_view> capabilities() const;
