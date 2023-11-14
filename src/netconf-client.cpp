@@ -198,6 +198,7 @@ Session::~Session()
     ::nc_session_free(m_session, nullptr);
 }
 
+#ifdef LIBNETCONF2_CPP_ENABLED_SSH
 std::unique_ptr<Session> Session::connectPubkey(const std::string& host, const uint16_t port, const std::string& user, const std::string& pubPath, const std::string& privPath, std::optional<libyang::Context> ctx)
 {
     impl::ClientInit::instance();
@@ -236,6 +237,7 @@ std::unique_ptr<Session> Session::connectKbdInteractive(const std::string& host,
     }
     return session;
 }
+#endif
 
 std::unique_ptr<Session> Session::connectFd(const int source, const int sink, std::optional<libyang::Context> ctx)
 {
