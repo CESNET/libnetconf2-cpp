@@ -7,7 +7,7 @@
               - name: github/CESNET/libyang
                 override-checkout: devel
               - name: github/CESNET/libnetconf2
-                override-checkout: devel
+                override-checkout: cesnet/wip-libnetconf-v2
               - name: github/onqtam/doctest
                 override-checkout: v2.4.8
               - name: github/rollbear/trompeloeil
@@ -19,7 +19,7 @@
               - name: github/CESNET/libyang
                 override-checkout: devel
               - name: github/CESNET/libnetconf2
-                override-checkout: devel
+                override-checkout: cesnet/wip-libnetconf-v2
               - name: github/onqtam/doctest
                 override-checkout: v2.4.11
               - name: github/rollbear/trompeloeil
