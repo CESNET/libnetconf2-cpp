@@ -16,6 +16,24 @@
       "message": "for some reason this always yields false during my testing",
       "revId": "3861dc4fe8fcea11d374dd99938f5be42f1203e3",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9988417b_8a956e41",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-21T14:29:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bab393a_4d7a8681",
+      "revId": "3861dc4fe8fcea11d374dd99938f5be42f1203e3",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
   ]
 }
