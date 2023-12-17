@@ -144,7 +144,7 @@ std::optional<libyang::DataNode> do_rpc(client::Session* session, managed_rpc&& 
                 return wrapped;
             }
 
-            auto anydataValue = wrapped.findPath(dataIdentifier, libyang::OutputNodes::Yes)->asAny().releaseValue();
+            auto anydataValue = wrapped.findPath(dataIdentifier, libyang::InputOutputNodes::Output)->asAny().releaseValue();
 
             // If there's no anydata value, then that means we get empty (but valid) data.
             if (!anydataValue) {
