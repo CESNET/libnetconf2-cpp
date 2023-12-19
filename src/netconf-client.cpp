@@ -71,7 +71,7 @@ char* ssh_auth_interactive_cb(const char* auth_name, const char* instruction, co
 
 auto guarded(nc_rpc* ptr)
 {
-    return std::unique_ptr<nc_rpc, decltype(&nc_rpc_free)>(ptr, nc_rpc_free);
+    return std::unique_ptr<nc_rpc, decltype([](auto rpc) constexpr { nc_rpc_free(rpc); })>(ptr);
 }
 
 namespace {
