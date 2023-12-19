@@ -58,7 +58,6 @@ public:
     void discard();
 
     libyang::Context libyangContext();
-    struct nc_session* session_internal(); // FIXME: remove me
 protected:
     struct nc_session* m_session;
 };

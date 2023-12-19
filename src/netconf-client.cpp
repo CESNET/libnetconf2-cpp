@@ -81,12 +81,12 @@ const auto get_path = "/ietf-netconf:get/data";
 
 using managed_rpc = std::invoke_result_t<decltype(guarded), nc_rpc*>;
 
-std::optional<libyang::DataNode> do_rpc(client::Session* session, managed_rpc&& rpc, const char* dataIdentifier)
+std::optional<libyang::DataNode> do_rpc(struct nc_session* session, managed_rpc&& rpc, const char* dataIdentifier)
 {
     uint64_t msgid;
     NC_MSG_TYPE msgtype;
 
-    msgtype = nc_send_rpc(session->session_internal(), rpc.get(), 1000, &msgid);
+    msgtype = nc_send_rpc(session, rpc.get(), 1000, &msgid);
     if (msgtype == NC_MSG_ERROR) {
         throw std::runtime_error{"Failed to send RPC"};
     }
@@ -97,7 +97,7 @@ std::optional<libyang::DataNode> do_rpc(client::Session* session, managed_rpc&& 
     lyd_node* raw_reply;
     lyd_node* envp;
     while (true) {
-        msgtype = nc_recv_reply(session->session_internal(), rpc.get(), msgid, 20000, &envp, &raw_reply);
+        msgtype = nc_recv_reply(session, rpc.get(), msgid, 20000, &envp, &raw_reply);
         auto replyInfo = libyang::wrapRawNode(envp);
 
         switch (msgtype) {
@@ -157,7 +157,7 @@ std::optional<libyang::DataNode> do_rpc(client::Session* session, managed_rpc&& 
     __builtin_unreachable();
 }
 
-void do_rpc_ok(client::Session* session, managed_rpc&& rpc)
+void do_rpc_ok(struct nc_session* session, managed_rpc&& rpc)
 {
     auto x = do_rpc(session, std::move(rpc), nullptr);
     if (x) {
@@ -177,11 +177,6 @@ void setLogCallback(const client::LogCb& callback)
 {
     impl::logCallback = callback;
     nc_set_print_clb(impl::logViaCallback);
-}
-
-struct nc_session* Session::session_internal()
-{
-    return m_session;
 }
 
 libyang::Context Session::libyangContext()
@@ -280,7 +275,7 @@ std::optional<libyang::DataNode> Session::get(const std::optional<std::string>& 
     if (!rpc) {
         throw std::runtime_error("Cannot create get RPC");
     }
-    return impl::do_rpc(this, std::move(rpc), impl::get_path);
+    return impl::do_rpc(m_session, std::move(rpc), impl::get_path);
 }
 
 const char* datastoreToString(NmdaDatastore datastore)
@@ -304,7 +299,7 @@ std::optional<libyang::DataNode> Session::getData(const NmdaDatastore datastore,
     if (!rpc) {
         throw std::runtime_error("Cannot create get RPC");
     }
-    return impl::do_rpc(this, std::move(rpc), impl::getData_path);
+    return impl::do_rpc(m_session, std::move(rpc), impl::getData_path);
 }
 
 void Session::editData(const NmdaDatastore datastore, const std::string& data)
@@ -313,7 +308,7 @@ void Session::editData(const NmdaDatastore datastore, const std::string& data)
     if (!rpc) {
         throw std::runtime_error("Cannot create get RPC");
     }
-    return impl::do_rpc_ok(this, std::move(rpc));
+    return impl::do_rpc_ok(m_session, std::move(rpc));
 }
 
 void Session::editConfig(const Datastore datastore,
@@ -333,7 +328,7 @@ void Session::editConfig(const Datastore datastore,
     if (!rpc) {
         throw std::runtime_error("Cannot create edit-config RPC");
     }
-    impl::do_rpc_ok(this, std::move(rpc));
+    impl::do_rpc_ok(m_session, std::move(rpc));
 }
 
 void Session::copyConfigFromString(const Datastore target, const std::string& data)
@@ -342,7 +337,7 @@ void Session::copyConfigFromString(const Datastore target, const std::string& da
     if (!rpc) {
         throw std::runtime_error("Cannot create copy-config RPC");
     }
-    impl::do_rpc_ok(this, std::move(rpc));
+    impl::do_rpc_ok(m_session, std::move(rpc));
 }
 
 void Session::commit()
@@ -351,7 +346,7 @@ void Session::commit()
     if (!rpc) {
         throw std::runtime_error("Cannot create commit RPC");
     }
-    impl::do_rpc_ok(this, std::move(rpc));
+    impl::do_rpc_ok(m_session, std::move(rpc));
 }
 
 void Session::discard()
@@ -360,7 +355,7 @@ void Session::discard()
     if (!rpc) {
         throw std::runtime_error("Cannot create discard RPC");
     }
-    impl::do_rpc_ok(this, std::move(rpc));
+    impl::do_rpc_ok(m_session, std::move(rpc));
 }
 
 std::optional<libyang::DataNode> Session::rpc_or_action(const std::string& xmlData)
@@ -370,7 +365,7 @@ std::optional<libyang::DataNode> Session::rpc_or_action(const std::string& xmlDa
         throw std::runtime_error("Cannot create generic RPC");
     }
 
-    return impl::do_rpc(this, std::move(rpc), nullptr);
+    return impl::do_rpc(m_session, std::move(rpc), nullptr);
 }
 
 void Session::copyConfig(const Datastore source, const Datastore destination)
@@ -379,7 +374,7 @@ void Session::copyConfig(const Datastore source, const Datastore destination)
     if (!rpc) {
         throw std::runtime_error("Cannot create copy-config RPC");
     }
-    impl::do_rpc_ok(this, std::move(rpc));
+    impl::do_rpc_ok(m_session, std::move(rpc));
 }
 
 ReportedError::ReportedError(const std::string& what)
