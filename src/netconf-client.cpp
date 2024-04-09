@@ -24,9 +24,9 @@ namespace impl {
 
 static client::LogCb logCallback;
 
-static void logViaCallback(NC_VERB_LEVEL level, const char* message)
+static void logViaCallback(const nc_session* session, NC_VERB_LEVEL level, const char* message)
 {
-    logCallback(libnetconf::utils::toLogLevel(level), message);
+    logCallback(session, libnetconf::utils::toLogLevel(level), message);
 }
 
 
@@ -165,7 +165,7 @@ void setLogLevel(LogLevel level)
 void setLogCallback(const client::LogCb& callback)
 {
     impl::logCallback = callback;
-    nc_set_print_clb(impl::logViaCallback);
+    nc_set_print_clb_session(callback ? impl::logViaCallback : NULL);
 }
 
 libyang::Context Session::libyangContext()
