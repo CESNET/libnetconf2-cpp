@@ -3,3 +3,9 @@
     - name: install libssh-debuginfo
       command: 'dnf debuginfo-install -y libssh'
       become: true
+
+    - name: install curl
+      package:
+        name: libcurl-devel
+        state: present
+      become: true
