@@ -90,7 +90,7 @@ TEST_CASE("client")
   }
 }
 )";
-            logCb = [&logBuf](const auto, const auto msg) {
+            logCb = [&logBuf](const auto, const auto, const auto msg) {
                 logBuf += "\n";
                 logBuf += msg;
             };
