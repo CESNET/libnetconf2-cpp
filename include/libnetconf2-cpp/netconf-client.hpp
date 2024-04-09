@@ -24,7 +24,7 @@ public:
     ~ReportedError() override;
 };
 
-using LogCb = std::function<void(LogLevel, const char*)>;
+using LogCb = std::function<void(const nc_session*, LogLevel, const char*)>;
 
 void setLogLevel(LogLevel level);
 void setLogCallback(const LogCb& callback);

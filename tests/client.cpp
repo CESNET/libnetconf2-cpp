@@ -91,7 +91,7 @@ TEST_CASE("client")
   }
 }
 )";
-            logCb = [&logBuf, &logMtx](const auto, const auto msg) {
+            logCb = [&logBuf, &logMtx](const auto, const auto, const auto msg) {
                 std::unique_lock lck{logMtx};
                 logBuf += "\n";
                 logBuf += msg;
