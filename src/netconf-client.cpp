@@ -58,17 +58,6 @@ public:
     ClientInit& operator=(ClientInit&&) = delete;
 };
 
-#ifdef LIBNETCONF2_CPP_ENABLED_SSH
-static std::mutex clientOptions;
-
-char* ssh_auth_interactive_cb(const char* auth_name, const char* instruction, const char* prompt, int echo, void* priv)
-{
-    const auto cb = static_cast<const client::KbdInteractiveCb*>(priv);
-    auto res = (*cb)(auth_name, instruction, prompt, echo);
-    return ::strdup(res.c_str());
-}
-#endif
-
 auto guarded(nc_rpc* ptr)
 {
     return std::unique_ptr<nc_rpc, decltype([](auto rpc) constexpr { nc_rpc_free(rpc); })>(ptr);
@@ -194,47 +183,6 @@ Session::~Session()
 {
     ::nc_session_free(m_session, nullptr);
 }
-
-#ifdef LIBNETCONF2_CPP_ENABLED_SSH
-std::unique_ptr<Session> Session::connectPubkey(const std::string& host, const uint16_t port, const std::string& user, const std::string& pubPath, const std::string& privPath, std::optional<libyang::Context> ctx)
-{
-    impl::ClientInit::instance();
-
-    {
-        // FIXME: this is still horribly not enough. libnetconf *must* provide us with something better.
-        std::lock_guard lk(impl::clientOptions);
-        nc_client_ssh_set_username(user.c_str());
-        nc_client_ssh_set_auth_pref(NC_SSH_AUTH_PUBLICKEY, 5);
-        nc_client_ssh_add_keypair(pubPath.c_str(), privPath.c_str());
-    }
-    auto session = std::make_unique<Session>(nc_connect_ssh(host.c_str(), port, ctx ? libyang::retrieveContext(*ctx) : nullptr));
-    if (!session->m_session) {
-        throw std::runtime_error{"nc_connect_ssh failed"};
-    }
-    return session;
-}
-
-std::unique_ptr<Session> Session::connectKbdInteractive(const std::string& host, const uint16_t port, const std::string& user, const KbdInteractiveCb& callback, std::optional<libyang::Context> ctx)
-{
-    impl::ClientInit::instance();
-
-    std::lock_guard lk(impl::clientOptions);
-    auto cb_guard = make_unique_resource([user, &callback]() {
-        nc_client_ssh_set_username(user.c_str());
-        nc_client_ssh_set_auth_pref(NC_SSH_AUTH_INTERACTIVE, 5);
-        nc_client_ssh_set_auth_interactive_clb(impl::ssh_auth_interactive_cb, static_cast<void *>(&const_cast<KbdInteractiveCb&>(callback)));
-    }, []() {
-        nc_client_ssh_set_auth_interactive_clb(nullptr, nullptr);
-        nc_client_ssh_set_username(nullptr);
-    });
-
-    auto session = std::make_unique<Session>(nc_connect_ssh(host.c_str(), port, ctx ? libyang::retrieveContext(*ctx) : nullptr));
-    if (!session->m_session) {
-        throw std::runtime_error{"nc_connect_ssh failed"};
-    }
-    return session;
-}
-#endif
 
 std::unique_ptr<Session> Session::connectFd(const int source, const int sink, std::optional<libyang::Context> ctx)
 {
