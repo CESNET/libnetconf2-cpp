@@ -7,7 +7,6 @@
 #include <memory>
 #include <optional>
 #include <string>
-#include <string_view>
 #include <vector>
 
 struct nc_session;
@@ -42,7 +41,7 @@ public:
 #endif
     static std::unique_ptr<Session> connectSocket(const std::string& path, std::optional<libyang::Context> ctx = std::nullopt);
     static std::unique_ptr<Session> connectFd(const int source, const int sink, std::optional<libyang::Context> ctx = std::nullopt);
-    [[nodiscard]] std::vector<std::string_view> capabilities() const;
+    [[nodiscard]] std::vector<std::string> capabilities() const;
     std::optional<libyang::DataNode> get(const std::optional<std::string>& filter = std::nullopt);
     std::optional<libyang::DataNode> getData(const NmdaDatastore datastore, const std::optional<std::string>& filter = std::nullopt);
     void editConfig(const Datastore datastore,

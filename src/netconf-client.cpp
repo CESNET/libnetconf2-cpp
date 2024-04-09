@@ -258,9 +258,9 @@ std::unique_ptr<Session> Session::connectSocket(const std::string& path, std::op
     return session;
 }
 
-std::vector<std::string_view> Session::capabilities() const
+std::vector<std::string> Session::capabilities() const
 {
-    std::vector<std::string_view> res;
+    std::vector<std::string> res;
     auto caps = nc_session_get_cpblts(m_session);
     while (*caps) {
         res.emplace_back(*caps);
