@@ -5,7 +5,7 @@
             pre-run: ci/pre.yaml
             required-projects:
               - name: github/CESNET/libyang
-                override-checkout: devel
+                override-checkout: cesnet/2024-03--v2-latest
               - name: github/CESNET/libnetconf2
                 override-checkout: cesnet/wip-libnetconf-v2
               - name: github/onqtam/doctest
@@ -17,7 +17,7 @@
             pre-run: ci/pre.yaml
             required-projects: &projects
               - name: github/CESNET/libyang
-                override-checkout: devel
+                override-checkout: cesnet/2024-03--v2-latest
               - name: github/CESNET/libnetconf2
                 override-checkout: cesnet/wip-libnetconf-v2
               - name: github/onqtam/doctest
