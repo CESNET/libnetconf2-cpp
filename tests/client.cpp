@@ -44,6 +44,9 @@ TEST_CASE("client")
     std::function<std::optional<libyang::DataNode>(std::unique_ptr<libnetconf::client::Session>& session)> testedFunctionality;
     std::string replyData;
     std::string expectedJSON;
+    libnetconf::client::LogCb logCb;
+    std::string logBuf;
+    std::mutex logMtx;
 
     DOCTEST_SUBCASE("get-data")
     {
@@ -88,6 +91,11 @@ TEST_CASE("client")
   }
 }
 )";
+            logCb = [&logBuf, &logMtx](const auto, const auto msg) {
+                std::unique_lock lck{logMtx};
+                logBuf += "\n";
+                logBuf += msg;
+            };
         }
     }
 
@@ -159,6 +167,7 @@ TEST_CASE("client")
     }
 
     libnetconf::client::setLogLevel(libnetconf::LogLevel::Debug);
+    libnetconf::client::setLogCallback(logCb);
     auto x = std::jthread{[&testedFunctionality, &expectedJSON, &processInput, &processOutput] {
         auto ctx = libyang::Context(std::nullopt,
                 libyang::ContextOptions::DisableSearchCwd | libyang::ContextOptions::DisableSearchDirs);
@@ -191,4 +200,11 @@ TEST_CASE("client")
     // For <close-session>
     mock_server::skipNetconfChunk(processOutput, {"<close-session"});
     mock_server::sendRpcReply(curMsgId, processInput, mock_server::OK_REPLY);
+
+    std::unique_lock lck{logMtx};
+    if (logCb) {
+        REQUIRE(logBuf.find("urn:ietf:params:xml:ns:netconf:base:1.0") != std::string::npos);
+    } else {
+        REQUIRE(logBuf.empty());
+    }
 }
