@@ -165,7 +165,7 @@ void setLogLevel(LogLevel level)
 void setLogCallback(const client::LogCb& callback)
 {
     impl::logCallback = callback;
-    nc_set_print_clb(impl::logViaCallback);
+    nc_set_print_clb(callback ? impl::logViaCallback : NULL);
 }
 
 libyang::Context Session::libyangContext()
