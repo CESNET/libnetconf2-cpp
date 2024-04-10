@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e3477e0_d108d2f8",
+        "filename": "src/netconf-client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-04-10T15:10:05Z",
+      "side": 1,
+      "message": "nice, did not know that you can have empty std::function object",
+      "range": {
+        "startLine": 168,
+        "startChar": 21,
+        "endLine": 168,
+        "endChar": 59
+      },
+      "revId": "b1fd592a60077c8f2f52ed77b4fcf309faf2ac07",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
