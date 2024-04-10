@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "360cf121_e52b8ac4",
+        "filename": ".zuul.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-04-10T10:59:10Z",
+      "side": 1,
+      "message": "since this depends on some unmerged patches to upstream libnetconf2, let\u0027s mark it as CR-1 for now",
+      "revId": "b88db613a82fa06d564f0780ac0e9d81074c013a",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
