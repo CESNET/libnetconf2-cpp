@@ -34,6 +34,24 @@
       "parentUuid": "e9ae49a7_2c1f5f1e",
       "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3e41306_2670aa98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-06-05T20:22:46Z",
+      "side": 1,
+      "message": "no, https://github.com/CESNET/libnetconf2/commits/devel/ says it\u0027s 3.3.0 (and I\u0027ve just resynced our mirror)",
+      "parentUuid": "0c73ebf0_54e34f0e",
+      "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
   ]
 }
