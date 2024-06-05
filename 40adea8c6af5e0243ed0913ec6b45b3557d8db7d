@@ -16,6 +16,24 @@
       "message": "Let\u0027s depend on libnetconf2 \u003e\u003d 3.3.0 for this",
       "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c73ebf0_54e34f0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-06-05T18:11:35Z",
+      "side": 1,
+      "message": "Did you mean 3.2.2?",
+      "parentUuid": "e9ae49a7_2c1f5f1e",
+      "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
   ]
 }
