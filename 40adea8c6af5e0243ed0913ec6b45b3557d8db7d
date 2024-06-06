@@ -52,6 +52,24 @@
       "parentUuid": "0c73ebf0_54e34f0e",
       "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a5a481_f2f69759",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-06-06T07:34:14Z",
+      "side": 1,
+      "message": "Yes there is a new version. But the breaking change is in 3.2.2. I have not tested 3.3 yet. Should I?",
+      "parentUuid": "d3e41306_2670aa98",
+      "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
   ]
 }
