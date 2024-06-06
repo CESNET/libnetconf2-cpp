@@ -16,6 +16,24 @@
       "message": "since this depends on some unmerged patches to upstream libnetconf2, let\u0027s mark it as CR-1 for now",
       "revId": "b88db613a82fa06d564f0780ac0e9d81074c013a",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4b8b5b_768a90ca",
+        "filename": ".zuul.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-06-06T10:09:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "360cf121_e52b8ac4",
+      "revId": "b88db613a82fa06d564f0780ac0e9d81074c013a",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
   ]
 }
