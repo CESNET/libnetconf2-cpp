@@ -88,6 +88,24 @@
       "parentUuid": "09a5a481_f2f69759",
       "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73dec57f_ce956b90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-06-06T10:15:53Z",
+      "side": 1,
+      "message": "(done in a follow-up commit, that\u0027s better I guess)",
+      "parentUuid": "e6dbbeb6_747f8461",
+      "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
   ]
 }
