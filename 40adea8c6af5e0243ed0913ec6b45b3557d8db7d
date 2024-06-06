@@ -70,6 +70,24 @@
       "parentUuid": "d3e41306_2670aa98",
       "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6dbbeb6_747f8461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-06-06T09:22:18Z",
+      "side": 1,
+      "message": "I\u0027ll rebase this with the other libyang-cpp change as well, so I\u0027m going to take care of this. Thanks for having used the correct version, and my bad :).",
+      "parentUuid": "09a5a481_f2f69759",
+      "revId": "40adea8c6af5e0243ed0913ec6b45b3557d8db7d",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
   ]
 }
