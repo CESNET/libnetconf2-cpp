@@ -20,16 +20,16 @@ add_custom_target(libnetconf2-cpp-version-cmake
         cmake/ProjectGitVersionRunner.cmake
         )
 include(cmake/ProjectGitVersion.cmake)
-prepare_git_version(LIBYANG_CPP_VERSION "0.0")
+prepare_git_version(LIBYANG_CPP_VERSION "3")
 
 find_package(Doxygen)
 option(WITH_DOCS "Create and install internal documentation (needs Doxygen)" ${DOXYGEN_FOUND})
 option(BUILD_SHARED_LIBS "By default, shared libs are enabled. Turn off for a static build." ON)
 
 find_package(PkgConfig)
-pkg_check_modules(LIBYANG_CPP REQUIRED libyang-cpp>=2 IMPORTED_TARGET)
+pkg_check_modules(LIBYANG_CPP REQUIRED libyang-cpp>=3 IMPORTED_TARGET)
 pkg_check_modules(LIBNETCONF2 REQUIRED libnetconf2>=3.5.1 IMPORTED_TARGET)
-set(LIBNETCONF2_CPP_PKG_VERSION "2")
+set(LIBNETCONF2_CPP_PKG_VERSION "3")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
@@ -38,6 +38,12 @@ add_library(netconf2-cpp
     )
 
 target_link_libraries(netconf2-cpp PUBLIC PkgConfig::LIBYANG_CPP PRIVATE PkgConfig::LIBNETCONF2)
+# We do not offer any long-term API/ABI guarantees. To make stuff easier for downstream consumers,
+# we will be bumping both API and ABI versions very deliberately.
+# There will be no attempts at semver tracking, for example.
+set_target_properties(netconf2-cpp PROPERTIES
+    VERSION ${LIBNETCONF2_CPP_PKG_VERSION}
+    SOVERSION ${LIBNETCONF2_CPP_PKG_VERSION})
 
 if(BUILD_TESTING)
     set(THREADS_PREFER_PTHREAD_FLAG ON)
