@@ -42,6 +42,7 @@ if [[ $ZUUL_JOB_NAME =~ .*-tsan ]]; then
     export CFLAGS="-fsanitize=thread ${CFLAGS}"
     export CXXFLAGS="-fsanitize=thread ${CXXFLAGS}"
     export LDFLAGS="-fsanitize=thread ${LDFLAGS}"
+    export TSAN_OPTIONS="suppressions=${ZUUL_PROJECT_SRC_DIR}/ci/tsan.supp"
 
     # Our TSAN does not have interceptors for a variety of "less common" functions such as pthread_mutex_clocklock.
     # Disable all functions which are optional in sysrepo/libnetconf2/Netopeer2.
