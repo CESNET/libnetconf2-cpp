@@ -49,7 +49,7 @@ if(BUILD_TESTING)
     set(THREADS_PREFER_PTHREAD_FLAG ON)
     find_package(Threads)
     find_package(doctest 2.4.8 REQUIRED)
-    find_package(Boost REQUIRED)
+    find_package(Boost REQUIRED CONFIG)
 
     add_library(DoctestIntegration STATIC
         tests/doctest-integration.cpp
