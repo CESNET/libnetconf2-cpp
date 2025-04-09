@@ -78,7 +78,7 @@ build_n_test() {
 
 build_n_test github/CESNET/libyang -DENABLE_TESTS=ON -DENABLE_VALGRIND_TESTS=OFF
 LSAN_OPTIONS="suppressions=${ZUUL_PROJECT_SRC_DIR}/ci/lsan.supp" build_n_test github/CESNET/libnetconf2 -DENABLE_TESTS=ON
-build_n_test github/onqtam/doctest -DDOCTEST_WITH_TESTS=OFF
+build_n_test github/doctest/doctest -DDOCTEST_WITH_TESTS=OFF
 # non-release builds download Catch2
 CMAKE_BUILD_TYPE=Release build_n_test github/rollbear/trompeloeil
 build_n_test CzechLight/libyang-cpp -DBUILD_TESTING=ON

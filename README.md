@@ -13,7 +13,7 @@ Object-oriented bindings of the [`libnetconf2`](https://github.com/CESNET/libnet
 - [`libnetconf2`](https://github.com/CESNET/libnetconf2)
 - [C++ bindings for `libyang`](https://github.com/CESNET/libyang-cpp)
 - optionally, Doxygen for building the documentation
-- optionally, [Doctest](https://github.com/onqtam/doctest/) as a C++ unit test framework
+- optionally, [Doctest](https://github.com/doctest/doctest/) as a C++ unit test framework
 - optionally, [Boost](https://www.boost.org/) for the test suite
 
 The build process uses [CMake](https://cmake.org/runningcmake/).
