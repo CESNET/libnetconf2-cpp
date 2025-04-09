@@ -8,7 +8,7 @@
                 override-checkout: devel
               - name: github/CESNET/libnetconf2
                 override-checkout: devel
-              - name: github/onqtam/doctest
+              - name: github/doctest/doctest
                 override-checkout: v2.4.8
               - name: github/rollbear/trompeloeil
                 override-checkout: v44
@@ -20,7 +20,7 @@
                 override-checkout: devel
               - name: github/CESNET/libnetconf2
                 override-checkout: devel
-              - name: github/onqtam/doctest
+              - name: github/doctest/doctest
                 override-checkout: v2.4.11
               - name: github/rollbear/trompeloeil
                 override-checkout: v44
