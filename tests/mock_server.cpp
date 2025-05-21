@@ -5,7 +5,6 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
 */
-#include <boost/process.hpp>
 #include <doctest/doctest.h>
 #include <fstream>
 #include <filesystem>

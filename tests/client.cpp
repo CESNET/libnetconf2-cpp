@@ -6,7 +6,14 @@
  * SPDX-License-Identifier: BSD-3-Clause
 */
 
+#include <boost/version.hpp>
+#if BOOST_VERSION < 108800
 #include <boost/process.hpp>
+#else
+#define BOOST_PROCESS_VERSION 1
+#include <boost/process/v1/pipe.hpp>
+#endif
+
 #include <iostream>
 #include <doctest/doctest.h>
 #include <filesystem>
