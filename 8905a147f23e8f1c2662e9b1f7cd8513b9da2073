@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3cbe5dd_bbc0a1fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-05-28T08:18:09Z",
+      "side": 1,
+      "message": "I am sorry for +2 -\u003e 0 but the change parent is not current master",
+      "revId": "8905a147f23e8f1c2662e9b1f7cd8513b9da2073",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
