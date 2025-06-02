@@ -102,15 +102,16 @@ std::optional<libyang::DataNode> do_rpc(struct nc_session* session, managed_rpc&
             if (!raw_reply) { // <ok> reply, or empty data node, or error
                 std::string msg;
                 for (const auto& child : replyInfo.child()->siblings()) {
-                    if (child.asOpaque().name().name == "rpc-error") {
+                    if (child.path() == "/ietf-netconf:rpc-reply/rpc-error") {
                         for (const auto& error : child.childrenDfs()) {
-                            if (error.asOpaque().name().name == "error-message") {
+                            // Note that error-message and error-path are opaque nodes, other children are not.
+                            if (error.path() == "/ietf-netconf:rpc-reply/rpc-error/error-message") {
                                 msg += "Error: ";
                                 msg += error.asOpaque().value();
                                 msg += "\n";
                             }
 
-                            if (error.asOpaque().name().name == "error-path") {
+                            if (error.path() == "/ietf-netconf:rpc-reply/rpc-error/error-path") {
                                 msg += "Path: ";
                                 msg += error.asOpaque().value();
                                 msg += "\n";
