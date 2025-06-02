@@ -107,15 +107,15 @@ std::optional<libyang::DataNode> do_rpc(struct nc_session* session, managed_rpc&
                             if (error.asOpaque().name().name == "error-message") {
                                 msg += "Error: ";
                                 msg += error.asOpaque().value();
+                                msg += "\n";
                             }
 
                             if (error.asOpaque().name().name == "error-path") {
                                 msg += "Path: ";
                                 msg += error.asOpaque().value();
+                                msg += "\n";
                             }
                         }
-
-                        msg += "\n";
                     }
                 }
 
