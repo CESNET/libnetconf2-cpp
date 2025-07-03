@@ -113,7 +113,7 @@ std::optional<libyang::DataNode> do_rpc(struct nc_session* session, managed_rpc&
 
                             if (error.path() == "/ietf-netconf:rpc-reply/rpc-error/error-path") {
                                 msg += "Path: ";
-                                msg += error.asOpaque().value();
+                                msg += error.asTerm().valueStr();
                                 msg += "\n";
                             }
                         }
