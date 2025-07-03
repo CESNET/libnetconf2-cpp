@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ee7519a_eb8ef77d",
+        "filename": "src/netconf-client.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-07-03T13:05:22Z",
+      "side": 1,
+      "message": "I think that the code actually needs to work with either of these cases because the client \"could\" send a command with nodes from a model which is not implemented, and in that case the error-reply will contain opaque nodes.",
+      "revId": "7af6909d0fdca8d02f644f19b6b720f8d1871ead",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
