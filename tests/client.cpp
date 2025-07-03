@@ -160,16 +160,39 @@ TEST_CASE("client")
 
     DOCTEST_SUBCASE("NETCONF rpc replies with rpc-error")
     {
-        testedFunctionality = [](std::unique_ptr<libnetconf::client::Session>& session) {
-            REQUIRE_THROWS_WITH_AS(
-                session->editData(libnetconf::NmdaDatastore::Running, R"(<myLeaf xmlns="http://example.com">AHOJ</myLeaf>)"),
-                "Path: /cla-roadm:media-channels[cla-roadm:channel='16 (GHz)']\n"
-                "Error: Access to the data model \"czechlight-roadm-device\" is denied because \"tomas\" NACM authorization failed.\n",
-                libnetconf::client::ReportedError);
-            return std::nullopt;
-        };
+        DOCTEST_SUBCASE("rpc-path")
+        {
+            testedFunctionality = [](std::unique_ptr<libnetconf::client::Session>& session) {
+                REQUIRE_THROWS_WITH_AS(
+                    session->editData(libnetconf::NmdaDatastore::Running, R"(<myLeaf xmlns="http://example.com">AHOJ</myLeaf>)"),
+                    "Path: /example-schema:leafInt8\n"
+                    "Error: Access to the data model \"example-schema\" is denied because \"tomas\" NACM authorization failed.\n",
+                    libnetconf::client::ReportedError);
+                return std::nullopt;
+            };
 
-        replyData = R"(<rpc-error>
+            replyData = R"(<rpc-error>
+  <error-type>protocol</error-type>
+  <error-tag>access-denied</error-tag>
+  <error-severity>error</error-severity>
+  <error-path xmlns:aha="http://example.com">/aha:leafInt8</error-path>
+  <error-message xml:lang="en">Access to the data model "example-schema" is denied because "tomas" NACM authorization failed.</error-message>
+</rpc-error>
+)";
+        }
+
+        DOCTEST_SUBCASE("rpc-path contains invalid path")
+        {
+            testedFunctionality = [](std::unique_ptr<libnetconf::client::Session>& session) {
+                REQUIRE_THROWS_WITH_AS(
+                    session->editData(libnetconf::NmdaDatastore::Running, R"(<myLeaf xmlns="http://example.com">AHOJ</myLeaf>)"),
+                    "Path: /cla-roadm:media-channels[cla-roadm:channel='16 (GHz)']\n"
+                    "Error: Access to the data model \"czechlight-roadm-device\" is denied because \"tomas\" NACM authorization failed.\n",
+                    libnetconf::client::ReportedError);
+                return std::nullopt;
+            };
+
+            replyData = R"(<rpc-error>
   <error-type>protocol</error-type>
   <error-tag>access-denied</error-tag>
   <error-severity>error</error-severity>
@@ -177,6 +200,7 @@ TEST_CASE("client")
   <error-message xml:lang="en">Access to the data model "czechlight-roadm-device" is denied because "tomas" NACM authorization failed.</error-message>
 </rpc-error>
 )";
+        }
     }
 
     DOCTEST_SUBCASE("editConfig")
