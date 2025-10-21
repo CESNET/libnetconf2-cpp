@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63807f89_c0c049f6",
+        "filename": "tests/mock_server.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-10-21T15:38:12Z",
+      "side": 0,
+      "message": "Any idea why this is no longer needed?",
+      "range": {
+        "startLine": 792,
+        "startChar": 0,
+        "endLine": 792,
+        "endChar": 2
+      },
+      "revId": "082a4a504fa60aa7254906da7548c3cb25c2ed15",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
