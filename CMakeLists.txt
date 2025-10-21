@@ -19,15 +19,15 @@ add_custom_target(libnetconf2-cpp-version-cmake
         cmake/ProjectGitVersionRunner.cmake
         )
 include(cmake/ProjectGitVersion.cmake)
-prepare_git_version(LIBYANG_CPP_VERSION "3")
+prepare_git_version(LIBYANG_CPP_VERSION "4")
 
 find_package(Doxygen)
 option(WITH_DOCS "Create and install internal documentation (needs Doxygen)" ${DOXYGEN_FOUND})
 option(BUILD_SHARED_LIBS "By default, shared libs are enabled. Turn off for a static build." ON)
 
 find_package(PkgConfig)
-pkg_check_modules(LIBYANG_CPP REQUIRED libyang-cpp>=3 IMPORTED_TARGET)
-pkg_check_modules(LIBNETCONF2 REQUIRED libnetconf2>=3.5.1 IMPORTED_TARGET)
+pkg_check_modules(LIBYANG_CPP REQUIRED libyang-cpp>=5 IMPORTED_TARGET)
+pkg_check_modules(LIBNETCONF2 REQUIRED libnetconf2>=4.0.3 IMPORTED_TARGET)
 set(LIBNETCONF2_CPP_PKG_VERSION "3")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)

@@ -5,9 +5,9 @@
             pre-run: ci/pre.yaml
             required-projects:
               - name: github/CESNET/libyang
-                override-checkout: cesnet/2025-08-07
+                override-checkout: devel
               - name: github/CESNET/libnetconf2
-                override-checkout: cesnet/2025-08-08
+                override-checkout: devel
               - name: github/doctest/doctest
                 override-checkout: v2.4.8
               - name: github/rollbear/trompeloeil
@@ -17,9 +17,9 @@
             pre-run: ci/pre.yaml
             required-projects: &projects
               - name: github/CESNET/libyang
-                override-checkout: cesnet/2025-08-07
+                override-checkout: devel
               - name: github/CESNET/libnetconf2
-                override-checkout: cesnet/2025-08-08
+                override-checkout: devel
               - name: github/doctest/doctest
                 override-checkout: v2.4.11
               - name: github/rollbear/trompeloeil
