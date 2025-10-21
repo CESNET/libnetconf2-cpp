@@ -23,7 +23,7 @@ const auto yangLib = R"(
             <name>complete</name>
             <module>
                 <name>yang</name>
-                <revision>2022-06-16</revision>
+                <revision>2025-01-29</revision>
                 <namespace>urn:ietf:params:xml:ns:yang:1</namespace>
             </module>
             <module>
@@ -320,7 +320,7 @@ const auto yangLib = R"(
         </module>
         <module>
             <name>yang</name>
-            <revision>2022-06-16</revision>
+            <revision>2025-01-29</revision>
             <namespace>urn:ietf:params:xml:ns:yang:1</namespace>
             <conformance-type>implement</conformance-type>
         </module>
@@ -630,7 +630,7 @@ const auto serverHello = R"(
         <capability>
             urn:ietf:params:xml:ns:yang:ietf-yang-metadata?module=ietf-yang-metadata&amp;revision=2016-08-05
         </capability>
-        <capability>urn:ietf:params:xml:ns:yang:1?module=yang&amp;revision=2022-06-16</capability>
+        <capability>urn:ietf:params:xml:ns:yang:1?module=yang&amp;revision=2025-01-29</capability>
         <capability>
             urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;revision=2013-07-15
         </capability>
@@ -789,7 +789,6 @@ void handleSessionStart(int& curMsgId, boost::process::opstream& processInput, b
     sendHello(processInput);
     resolveGetSchema("ietf-netconf", "2013-09-29", Latest::Yes);
     resolveGetSchema("ietf-netconf-acm", "2018-02-14", Latest::No);
-    resolveGetSchema("ietf-yang-metadata", "2016-08-05", Latest::No);
     skipNetconfChunk(processOutput, {});
     sendRpcReply(curMsgId++, processInput, yangLib);
     resolveGetSchema("ietf-netconf-nmda", "2019-01-07", Latest::Yes);
