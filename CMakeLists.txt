@@ -19,7 +19,7 @@ add_custom_target(libnetconf2-cpp-version-cmake
         cmake/ProjectGitVersionRunner.cmake
         )
 include(cmake/ProjectGitVersion.cmake)
-prepare_git_version(LIBYANG_CPP_VERSION "3")
+prepare_git_version(LIBNETCONF2_CPP_VERSION "3")
 
 find_package(Doxygen)
 option(WITH_DOCS "Create and install internal documentation (needs Doxygen)" ${DOXYGEN_FOUND})
