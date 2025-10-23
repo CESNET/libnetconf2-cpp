@@ -22,6 +22,30 @@
       },
       "revId": "082a4a504fa60aa7254906da7548c3cb25c2ed15",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "189e196b_934b6502",
+        "filename": "tests/mock_server.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-10-23T16:48:54Z",
+      "side": 0,
+      "message": "no idea, but the client is not requesting it anymore",
+      "parentUuid": "63807f89_c0c049f6",
+      "range": {
+        "startLine": 792,
+        "startChar": 0,
+        "endLine": 792,
+        "endChar": 2
+      },
+      "revId": "082a4a504fa60aa7254906da7548c3cb25c2ed15",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
     }
   ]
 }
