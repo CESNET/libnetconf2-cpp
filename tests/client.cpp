@@ -227,7 +227,7 @@ TEST_CASE("client")
         auto dataNode = testedFunctionality(session);
         std::string actualJSON;
         if (dataNode) {
-            actualJSON = dataNode->printStr(libyang::DataFormat::JSON, libyang::PrintFlags::WithSiblings).value();
+            actualJSON = dataNode->printStr(libyang::DataFormat::JSON, libyang::PrintFlags::Siblings).value();
         }
         REQUIRE(actualJSON == expectedJSON);
 
