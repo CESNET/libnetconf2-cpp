@@ -11,6 +11,7 @@ Object-oriented bindings of the [`libnetconf2`](https://github.com/CESNET/libnet
 - CMake 3.19+
 - [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/)
 - [`libnetconf2`](https://github.com/CESNET/libnetconf2)
+  - as of February 2026, stick with the `cesnet/2026-02-09--before-libyang-v5` branch aka CESNET/libnetconf2@3536626 due to pending libyang updates
 - [C++ bindings for `libyang`](https://github.com/CESNET/libyang-cpp)
 - optionally, Doxygen for building the documentation
 - optionally, [Doctest](https://github.com/doctest/doctest/) as a C++ unit test framework
