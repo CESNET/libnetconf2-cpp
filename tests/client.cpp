@@ -218,6 +218,19 @@ TEST_CASE("client")
         replyData = mock_server::OK_REPLY;
     }
 
+    DOCTEST_SUBCASE("unexpected reply XPath")
+    {
+        // we're sending <get-data/>, but we get back a <get/> reply
+        replyData = createGetReply(R"(<myLeaf xmlns="http://example.com">AHOJ</myLeaf>)"s);
+        testedFunctionality = [](std::unique_ptr<libnetconf::client::Session>& session) {
+            REQUIRE_THROWS_WITH_AS(
+                session->getData(libnetconf::NmdaDatastore::Running),
+                "RPC reply has no node /ietf-netconf-nmda:get-data/data",
+                std::runtime_error);
+            return std::nullopt;
+        };
+    }
+
     libnetconf::client::setLogLevel(libnetconf::LogLevel::Debug);
     libnetconf::client::setLogCallback(logCb);
     auto x = std::jthread{[&testedFunctionality, &expectedJSON, &processInput, &processOutput] {

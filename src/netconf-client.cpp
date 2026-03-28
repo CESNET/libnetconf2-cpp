@@ -134,8 +134,12 @@ std::optional<libyang::DataNode> do_rpc(struct nc_session* session, managed_rpc&
                 return wrapped;
             }
 
-            auto anydataValue = wrapped.findPath(dataIdentifier, libyang::InputOutputNodes::Output)->asAny().node();
+            auto target = wrapped.findPath(dataIdentifier, libyang::InputOutputNodes::Output);
+            if (!target) {
+                throw std::runtime_error{std::string{"RPC reply has no node "} + dataIdentifier};
+            }
 
+            auto anydataValue = target->asAny().node();
             if (!anydataValue) {
                 // If there's no anydata child, then that means we get empty (but valid) data.
                 return std::nullopt;
