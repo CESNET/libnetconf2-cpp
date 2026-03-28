@@ -134,14 +134,15 @@ std::optional<libyang::DataNode> do_rpc(struct nc_session* session, managed_rpc&
                 return wrapped;
             }
 
-            auto anydataValue = wrapped.findPath(dataIdentifier, libyang::InputOutputNodes::Output)->asAny().releaseValue();
+            auto anydataValue = wrapped.findPath(dataIdentifier, libyang::InputOutputNodes::Output)->asAny().node();
 
-            // If there's no anydata value, then that means we get empty (but valid) data.
             if (!anydataValue) {
+                // If there's no anydata child, then that means we get empty (but valid) data.
                 return std::nullopt;
             }
 
-            return std::get<libyang::DataNode>(*anydataValue);
+            anydataValue->unlinkWithSiblings();
+            return anydataValue;
         }
     }
     __builtin_unreachable();
