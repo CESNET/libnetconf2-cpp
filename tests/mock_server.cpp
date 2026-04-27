@@ -787,8 +787,6 @@ void handleSessionStart(int& curMsgId, boost::process::opstream& processInput, b
     };
     skipClientHello(processOutput);
     sendHello(processInput);
-    resolveGetSchema("ietf-netconf", "2013-09-29", Latest::Yes);
-    resolveGetSchema("ietf-netconf-acm", "2018-02-14", Latest::No);
     skipNetconfChunk(processOutput, {});
     sendRpcReply(curMsgId++, processInput, yangLib);
     resolveGetSchema("ietf-netconf-nmda", "2019-01-07", Latest::Yes);
@@ -797,7 +795,6 @@ void handleSessionStart(int& curMsgId, boost::process::opstream& processInput, b
     resolveGetSchema("ietf-netconf-notifications", "2012-02-06", Latest::No);
     resolveGetSchema("nc-notifications", "2008-07-14", Latest::No);
     resolveGetSchema("notifications", "2008-07-14", Latest::No);
-    resolveGetSchema("ietf-x509-cert-to-name", "2014-12-10", Latest::No);
     resolveGetSchema("ietf-keystore", "2019-07-02", Latest::No);
     resolveGetSchema("ietf-crypto-types", "2019-07-02", Latest::No);
     resolveGetSchema("ietf-truststore", "2019-07-02", Latest::No);

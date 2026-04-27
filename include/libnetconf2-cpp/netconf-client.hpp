@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <filesystem>
 #include <libyang-cpp/Context.hpp>
 #include <libnetconf2-cpp/Enum.hpp>
 #include <memory>
@@ -16,6 +17,8 @@ class DataNode;
 }
 
 namespace libnetconf {
+std::filesystem::path internalModuleDirectory();
+
 namespace client {
 
 class ReportedError : public std::runtime_error {
