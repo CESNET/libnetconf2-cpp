@@ -20,6 +20,16 @@ extern "C" {
 
 namespace libnetconf {
 
+/**
+ * Get the path to the location with systemwide internal YANG modules
+ *
+ * Wraps nc_yang_module_dir().
+ */
+std::filesystem::path internalModuleDirectory()
+{
+    return std::filesystem::path{nc_yang_module_dir()};
+}
+
 namespace impl {
 
 static client::LogCb logCallback;
