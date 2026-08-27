@@ -7,8 +7,8 @@
 Object-oriented bindings of the [`libnetconf2`](https://github.com/CESNET/libnetconf2) library.
 
 ## Installation
-- C++20 compiler (e.g., GCC 10.x+, clang 10+)
-- CMake 3.19+
+- C++23 compiler (e.g., GCC 13.x+, clang 16+)
+- CMake 3.22+
 - [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/)
 - [`libnetconf2`](https://github.com/CESNET/libnetconf2)
 - [C++ bindings for `libyang`](https://github.com/CESNET/libyang-cpp)
