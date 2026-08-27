@@ -11,7 +11,10 @@ Object-oriented bindings of the [`libnetconf2`](https://github.com/CESNET/libnet
 - CMake 3.22+
 - [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/)
 - [`libnetconf2`](https://github.com/CESNET/libnetconf2)
+  - for the minimal required version, check the [`CMakeLists.txt`](./CMakeLists.txt)
+  - during development, our `master` branch is CI-checked against the `devel` branch of *libnetconf2*
 - [C++ bindings for `libyang`](https://github.com/CESNET/libyang-cpp)
+  - for the minimal required version, check the [`CMakeLists.txt`](./CMakeLists.txt)
 - optionally, Doxygen for building the documentation
 - optionally, [Doctest](https://github.com/doctest/doctest/) as a C++ unit test framework
 - optionally, [Boost](https://www.boost.org/) for the test suite
